@@ -6,6 +6,11 @@
   --muted-gray: #9AA4AF;
 }
 
+/* Ensure smooth scrolling and proper font rendering */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   font-family: "Poppins", sans-serif;
@@ -14,9 +19,10 @@ body {
   line-height: 1.6;
 }
 
+/* === HERO SECTION === */
 .hero {
   min-height: 100vh;
-  padding: 0 20px 0; 
+  padding: 0 5%;
   text-align: center;
   background: linear-gradient(180deg, #0B0D10, #0F3057);
   position: relative;
@@ -24,7 +30,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
+clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
 }
 
 .hero h1 {
@@ -35,19 +41,21 @@ body {
 .subtitle {
   color: var(--accent-blue);
   font-weight: 500;
+  font-size: 1.2rem;
 }
 
 .tagline {
   max-width: 600px;
   margin: 20px auto;
   color: var(--muted-gray);
+  font-size: 1.1rem;
 }
 
 .btn {
-  width: 140px; 
+  width: 140px;
   display: inline-block;
   margin: 15px auto 0;
-  padding: 6px 0; 
+  padding: 6px 0;
   background: var(--accent-blue);
   color: #000;
   text-decoration: none;
@@ -76,6 +84,18 @@ body {
   left: 125%;
 }
 
+.btn:hover {
+  box-shadow: 0 0 20px var(--accent-blue), 0 0 40px var(--accent-blue);
+  transform: translateY(-3px);
+}
+
+/* Hide initial animation state */
+.hero h1, .subtitle, .tagline, .btn {
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+/* === SECTIONS === */
 .section {
   padding: 70px 10%;
 }
@@ -83,8 +103,10 @@ body {
 .section h2 {
   color: var(--accent-blue);
   margin-bottom: 30px;
+  font-size: 2rem;
 }
 
+/* === CARDS === */
 .card {
   background: #111827;
   padding: 25px;
@@ -97,30 +119,34 @@ body {
   border: 1px solid var(--accent-blue);
 }
 
-.skills span {
-  display: inline-block;
-  background: #1f2933;
-  padding: 10px 16px;
-  margin: 8px;
-  border-radius: 20px;
-  font-size: 0.9rem;
+/* === SKILLS === */
+.skills .skill {
+  margin-bottom: 15px;
 }
 
+.skill-bar {
+  background: #1f2933;
+  border-radius: 20px;
+  overflow: hidden;
+  height: 12px;
+  margin-top: 5px;
+}
+
+.skill-fill {
+  background: var(--accent-blue);
+  height: 100%;
+  width: 0;
+  border-radius: 20px;
+  transition: width 2s ease-in-out;
+}
+
+/* === CONTACT === */
 .contact a {
   color: var(--accent-blue);
   text-decoration: none;
 }
 
-.hero h1, .subtitle, .tagline, .btn {
-  transform: translateY(20px);
-  opacity: 0;
-}
-
-.btn:hover {
-  box-shadow: 0 0 20px var(--accent-blue), 0 0 40px var(--accent-blue);
-  transform: translateY(-3px);
-}
-
+/* === NAVBAR === */
 .navbar {
   position: sticky;
   top: 0;
@@ -234,6 +260,7 @@ body {
   transform: rotate(-45deg) translate(5px, -5px);
 }
 
+/* === FOOTER === */
 footer {
   color: var(--text-light);
   text-align: center;
@@ -245,6 +272,7 @@ footer p {
   margin: 0;
 }
 
+/* === SCROLL TO TOP BUTTON === */
 #scrollTopBtn {
   position: fixed;
   bottom: 30px;
@@ -275,32 +303,42 @@ footer p {
   opacity: 0.8;
 }
 
-.hero::before {
+/* === HERO DECORATION === */
+.hero::before,
+.hero::after {
   content: '';
   position: absolute;
+  border-radius: 50%;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.hero::before {
   width: 150px;
   height: 150px;
   background: var(--accent-blue);
-  border-radius: 50%;
   top: 50px;
   left: 20%;
-  opacity: 0.15;
   animation: float 6s ease-in-out infinite alternate;
 }
 
 .hero::after {
-  content: '';
-  position: absolute;
   width: 120px;
   height: 120px;
   background: var(--accent-blue);
-  border-radius: 50%;
   top: 200px;
   right: 15%;
   opacity: 0.12;
   animation: float 8s ease-in-out infinite alternate-reverse;
 }
 
+@keyframes float {
+  0% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-20px) translateX(15px); }
+  100% { transform: translateY(0) translateX(0); }
+}
+
+/* === HERO CONTENT LAYOUT === */
 .hero-content {
   display: flex;
   align-items: center;
@@ -323,32 +361,9 @@ footer p {
   box-shadow: 0 10px 30px rgba(28,163,236,0.3);
 }
 
-@keyframes float {
-  0% { transform: translateY(0) translateX(0); }
-  50% { transform: translateY(-20px) translateX(15px); }
-  100% { transform: translateY(0) translateX(0); }
-}
+/*         RESPONSIVE MEDIA QUERIES    */
 
-.skills .skill {
-  margin-bottom: 15px;
-}
-
-.skill-bar {
-  background: #1f2933;
-  border-radius: 20px;
-  overflow: hidden;
-  height: 12px;
-  margin-top: 5px;
-}
-
-.skill-fill {
-  background: var(--accent-blue);
-  height: 100%;
-  width: 0;
-  border-radius: 20px;
-  transition: width 2s ease-in-out;
-}
-
+/* Tablet and below */
 @media (max-width: 900px) {
   .desktop-nav {
     display: none;
@@ -358,5 +373,94 @@ footer p {
   }
   #mobileNav {
     display: block;
+  }
+
+  
+  .hero {
+   
+    padding: 0 5%;
+  }
+
+  .hero-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-text {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .section {
+    padding: 60px 5%;
+  }
+
+  .hero h1 {
+    font-size: 2.3rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+  }
+
+  .tagline {
+    font-size: 1rem;
+    padding: 0 10px;
+  }
+
+  .hero-image img {
+    width: 170px;
+    height: 170px;
+  }
+
+  footer, .contact {
+    padding: 20px 5%;
+  }
+
+  #scrollTopBtn {
+    bottom: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* Mobile (small phones) */
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 1.9rem;
+    line-height: 1.2;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .tagline {
+    font-size: 0.95rem;
+  }
+
+  .btn {
+    width: 125px;
+    font-size: 0.8rem;
+    padding: 5px 0;
+  }
+
+  .section h2 {
+    font-size: 1.7rem;
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  .nav-panel a {
+    font-size: 1.15rem;
+    gap: 20px;
+  }
+
+  .hero-image img {
+    width: 150px;
+    height: 150px;
   }
 }

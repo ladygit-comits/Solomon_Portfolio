@@ -1,7 +1,10 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
+
+  /* ================= HERO INTRO ANIMATION ================= */
   const heroElements = document.querySelectorAll('.hero h1, .subtitle, .tagline, .btn');
   heroElements.forEach((el, i) => {
     el.style.opacity = 0;
+    el.style.transform = 'translateY(20px)';
     setTimeout(() => {
       el.style.transition = 'opacity 1s ease-out, transform 1s ease-out';
       el.style.opacity = 1;
@@ -9,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }, i * 300);
   });
 
+  /* ================= CARD HOVER EFFECT ================= */
   const cards = document.querySelectorAll('.card');
   cards.forEach(card => {
     card.addEventListener('mouseenter', () => {
@@ -21,47 +25,84 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
+  /* ================= SMOOTH SCROLL ================= */
   const links = document.querySelectorAll('a[href^="#"]');
   links.forEach(link => {
-    link.addEventListener('click', function(e) {
+    link.addEventListener('click', function (e) {
       e.preventDefault();
-      document.querySelector(this.getAttribute('href')).scrollIntoView({behavior: 'smooth'});
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
     });
   });
 
+  /* ================= SCROLL TO TOP BUTTON ================= */
   const scrollBtn = document.getElementById('scrollTopBtn');
-  window.onscroll = function() {
-    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-      scrollBtn.style.display = "block";
-    } else {
-      scrollBtn.style.display = "none";
-    }
-  };
-  scrollBtn.addEventListener('click', function() {
-    window.scrollTo({top: 0, behavior: 'smooth'});
+  window.addEventListener('scroll', () => {
+    scrollBtn.style.display =
+      document.documentElement.scrollTop > 300 ? 'flex' : 'none';
   });
 
+  scrollBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  /* ================= TYPEWRITER EFFECT ================= */
   const tagline = document.querySelector('.tagline');
-  const text = tagline.textContent;
-  tagline.textContent = '';
-  let i = 0;
-  function typeWriter() {
-    if (i < text.length) {
-      tagline.textContent += text.charAt(i);
-      i++;
-      setTimeout(typeWriter, 50);
+  if (tagline) {
+    const text = tagline.textContent;
+    tagline.textContent = '';
+    let i = 0;
+
+    function typeWriter() {
+      if (i < text.length) {
+        tagline.textContent += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 50);
+      }
     }
+    typeWriter();
   }
-  typeWriter();
+
+  /* ================= HAMBURGER MENU (UX FIXED) ================= */
+  const hamburger = document.querySelector('.hamburger');
+  const mobileNav = document.getElementById('mobileNav');
+  const overlay = document.querySelector('.nav-overlay');
+  const navLinks = document.querySelectorAll('.nav-panel a');
+
+  if (hamburger && mobileNav) {
+    hamburger.addEventListener('click', () => {
+      mobileNav.classList.toggle('active');
+      document.body.style.overflow =
+        mobileNav.classList.contains('active') ? 'hidden' : '';
+    });
+
+    /* Close when clicking overlay (NO forced selection) */
+    overlay.addEventListener('click', () => {
+      mobileNav.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+
+    /* Close when clicking a nav link */
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileNav.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+  }
 });
+
+/* ================= SKILL BAR ANIMATION ================= */
 const skillFills = document.querySelectorAll('.skill-fill');
 
 function animateSkills() {
   const triggerBottom = window.innerHeight - 100;
   skillFills.forEach(skill => {
     const skillTop = skill.getBoundingClientRect().top;
-    if(skillTop < triggerBottom) {
-      skill.style.width = skill.getAttribute('style').replace('width: ', '');
+    if (skillTop < triggerBottom) {
+      skill.style.width = skill.dataset.level;
     }
   });
 }

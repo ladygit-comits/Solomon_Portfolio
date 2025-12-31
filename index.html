@@ -14,7 +14,30 @@
     <img src="images/solomon-favicon.png" alt="Solomon Logo" class="logo-img">
     Solomon Njiiri Kung’u
   </div>
-  <nav>
+
+  <!-- Hamburger -->
+  <button class="hamburger" aria-label="Toggle menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <!-- Mobile Nav -->
+  <nav id="mobileNav">
+    <div class="nav-overlay"></div>
+
+    <div class="nav-panel">
+      <a href="#about">About</a>
+      <a href="#education">Education</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#volunteering">Volunteering</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Desktop Nav -->
+  <nav class="desktop-nav">
     <a href="#about">About</a>
     <a href="#education">Education</a>
     <a href="#experience">Experience</a>
@@ -23,6 +46,7 @@
     <a href="#contact">Contact</a>
   </nav>
 </header>
+
 
   <!-- HERO -->
   <section class="hero">
@@ -101,36 +125,57 @@
     </div>
   </section>
 
-  <!-- SKILLS -->
- <section id="skills" class="section">
+ <!-- SKILLS -->
+<section id="skills" class="section">
   <h2>Key Skills</h2>
+
   <div class="skills">
+
     <div class="skill">
       <span>Customer Service</span>
-      <div class="skill-bar"><div class="skill-fill" style="width: 90%;"></div></div>
+      <div class="skill-bar">
+        <div class="skill-fill" data-level="90%"></div>
+      </div>
     </div>
+
     <div class="skill">
       <span>Food & Beverage Service</span>
-      <div class="skill-bar"><div class="skill-fill" style="width: 85%;"></div></div>
+      <div class="skill-bar">
+        <div class="skill-fill" data-level="85%"></div>
+      </div>
     </div>
+
     <div class="skill">
       <span>Front Office Operations</span>
-      <div class="skill-bar"><div class="skill-fill" style="width: 80%;"></div></div>
+      <div class="skill-bar">
+        <div class="skill-fill" data-level="80%"></div>
+      </div>
     </div>
+
     <div class="skill">
       <span>Housekeeping Standards</span>
-      <div class="skill-bar"><div class="skill-fill" style="width: 85%;"></div></div>
+      <div class="skill-bar">
+        <div class="skill-fill" data-level="85%"></div>
+      </div>
     </div>
+
     <div class="skill">
       <span>Event Support</span>
-      <div class="skill-bar"><div class="skill-fill" style="width: 80%;"></div></div>
+      <div class="skill-bar">
+        <div class="skill-fill" data-level="80%"></div>
+      </div>
     </div>
+
     <div class="skill">
       <span>Sustainable Tourism</span>
-      <div class="skill-bar"><div class="skill-fill" style="width: 75%;"></div></div>
+      <div class="skill-bar">
+        <div class="skill-fill" data-level="75%"></div>
+      </div>
     </div>
+
   </div>
 </section>
+
 
 
   <!-- VOLUNTEERING -->

@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-
-  /* ================= HERO INTRO ANIMATION ================= */
   const heroElements = document.querySelectorAll('.hero h1, .subtitle, .tagline, .btn');
   heroElements.forEach((el, i) => {
     el.style.opacity = 0;
@@ -12,7 +10,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }, i * 300);
   });
 
-  /* ================= CARD HOVER EFFECT ================= */
   const cards = document.querySelectorAll('.card');
   cards.forEach(card => {
     card.addEventListener('mouseenter', () => {
@@ -25,36 +22,29 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  /* ================= SMOOTH SCROLL ================= */
   const links = document.querySelectorAll('a[href^="#"]');
   links.forEach(link => {
     link.addEventListener('click', function (e) {
       e.preventDefault();
       const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth' });
-      }
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
     });
   });
 
-  /* ================= SCROLL TO TOP BUTTON ================= */
   const scrollBtn = document.getElementById('scrollTopBtn');
   window.addEventListener('scroll', () => {
-    scrollBtn.style.display =
-      document.documentElement.scrollTop > 300 ? 'flex' : 'none';
+    scrollBtn.style.display = document.documentElement.scrollTop > 300 ? 'flex' : 'none';
   });
 
   scrollBtn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  /* ================= TYPEWRITER EFFECT ================= */
   const tagline = document.querySelector('.tagline');
   if (tagline) {
     const text = tagline.textContent;
     tagline.textContent = '';
     let i = 0;
-
     function typeWriter() {
       if (i < text.length) {
         tagline.textContent += text.charAt(i);
@@ -65,47 +55,40 @@ document.addEventListener('DOMContentLoaded', function () {
     typeWriter();
   }
 
-  /* ================= HAMBURGER MENU (UX FIXED) ================= */
   const hamburger = document.querySelector('.hamburger');
   const mobileNav = document.getElementById('mobileNav');
   const overlay = document.querySelector('.nav-overlay');
   const navLinks = document.querySelectorAll('.nav-panel a');
 
-  if (hamburger && mobileNav) {
-    hamburger.addEventListener('click', () => {
-      mobileNav.classList.toggle('active');
-      document.body.style.overflow =
-        mobileNav.classList.contains('active') ? 'hidden' : '';
-    });
+  hamburger.addEventListener('click', () => {
+    mobileNav.classList.toggle('active');
+    hamburger.classList.toggle('active');
+    document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+  });
 
-    /* Close when clicking overlay (NO forced selection) */
-    overlay.addEventListener('click', () => {
+  overlay.addEventListener('click', () => {
+    mobileNav.classList.remove('active');
+    hamburger.classList.remove('active');
+    document.body.style.overflow = '';
+  });
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
       mobileNav.classList.remove('active');
+      hamburger.classList.remove('active');
       document.body.style.overflow = '';
     });
+  });
 
-    /* Close when clicking a nav link */
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        mobileNav.classList.remove('active');
-        document.body.style.overflow = '';
-      });
+  const skillFills = document.querySelectorAll('.skill-fill');
+  function animateSkills() {
+    const triggerBottom = window.innerHeight - 100;
+    skillFills.forEach(skill => {
+      const skillTop = skill.getBoundingClientRect().top;
+      if (skillTop < triggerBottom) skill.style.width = skill.dataset.level;
     });
   }
+
+  window.addEventListener('scroll', animateSkills);
+  window.addEventListener('load', animateSkills);
 });
-
-/* ================= SKILL BAR ANIMATION ================= */
-const skillFills = document.querySelectorAll('.skill-fill');
-
-function animateSkills() {
-  const triggerBottom = window.innerHeight - 100;
-  skillFills.forEach(skill => {
-    const skillTop = skill.getBoundingClientRect().top;
-    if (skillTop < triggerBottom) {
-      skill.style.width = skill.dataset.level;
-    }
-  });
-}
-
-window.addEventListener('scroll', animateSkills);
-window.addEventListener('load', animateSkills);

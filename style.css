@@ -201,10 +201,16 @@ clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
 }
 
 #mobileNav {
-  display: none;
   position: fixed;
   inset: 0;
   z-index: 1050;
+  pointer-events: none; 
+  visibility: hidden;  
+}
+
+#mobileNav.active {
+  pointer-events: auto;
+  visibility: visible;
 }
 
 #mobileNav .nav-overlay {
